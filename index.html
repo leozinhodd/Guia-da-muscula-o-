@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Minha Loja Online Completa</title>
+<style>
+  /* Reset e básico */
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    font-family: Arial, sans-serif;
+    background: #f4f4f4;
+    margin: 0;
+    padding: 0 15px;
+    color: #333;
+  }
+  header {
+    background: #4caf50;
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  nav a {
+    color: white;
+    margin: 0 12px;
+    text-decoration: none;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  nav a:hover {
+    text-decoration: underline;
+  }
+  main {
+    max-width: 900px;
+    margin: 30px auto;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+  }
+  section {
+    margin-bottom: 40px;
+  }
+  h1, h2, h3 {
+    margin-top: 0;
+  }
+  footer {
+    text-align: center;
+    padding: 15px 0;
+    background: #222;
+    color: white;
+    margin-top: 50px;
+  }
+  @media (max-width:600px) {
+    nav a {
+      display: block;
+      margin: 8px 0;
+    }
+  }
+  #como-comprar {
+    background: #e8f5e9;
+    padding: 20px;
+    border-radius: 8px;
+  }
+  #como-comprar ol {
+    padding-left: 20px;
+  }
+  #como-comprar li {
+    margin-bottom: 12px;
+    font-size: 17px;
+  }
+  #como-comprar button {
+    margin-top: 15px;
+    background: #4caf50;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  #como-comprar button:hover {
+    background: #388e3c;
+  }
+  #loja {
+    display: none;
+  }
+  .produto {
+    border: 1px solid #ccc;
+    padding: 15px;
+    border-radius: 6px;
+    margin-bottom: 15px;
+    background: #fff;
+  }
+  .produto h3 {
+    margin: 0 0 10px 0;
+  }
+  .produto p {
+    margin: 0 0 15px 0;
+  }
+  .btn-adicionar {
+    background: #2196f3;
+    border: none;
+    color: white;
+    padding: 10px 18px;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  .btn-adicionar:hover {
+    background: #0b7dda;
+  }
+  .btn-comprar-agora {
+    background: #e91e63;
+    border: none;
+    color: white;
+    padding: 10px 18px;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-left: 10px;
+  }
+  .btn-comprar-agora:hover {
+    background: #ad1457;
+  }
+  #carrinho {
+    display: none;
+    background: #fff3e0;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #ffb74d;
+  }
+  #carrinho h2 {
+    color: #f57c00;
+  }
+  #carrinho ul {
+    list-style: none;
+    padding-left: 0;
+  }
+  #carrinho ul li {
+    padding: 8px 0;
+    border-bottom: 1px solid #ccc;
+  }
+  #carrinho ul li:last-child {
+    border-bottom: none;
+  }
+  #carrinho-total {
+    font-weight: bold;
+    margin-top: 15px;
+  }
+  #btn-finalizar {
+    margin-top: 20px;
+    background: #f57c00;
+    border: none;
+    color: white;
+    padding: 12px 25px;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  #btn-finalizar:hover {
+    background: #ef6c00;
+  }
+  #btn-voltar {
+    margin-top: 20px;
+    background: #757575;
+    border: none;
+    color: white;
+    padding: 12px 25px;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  #btn-voltar:hover {
+    background: #555;
+  }
+</style>
+</head>
+<body>
+<header>
+  <h1>Minha Loja Online</h1>
+  <nav>
+    <a onclick="mostrarSecao('inicio')">Início</a>
+    <a onclick="mostrarSecao('como-comprar')">Como Comprar</a>
+    <a onclick="mostrarSecao('loja')">Loja</a>
+    <a onclick="mostrarSecao('carrinho')">Carrinho (<span id="contador-carrinho">0</span>)</a>
+  </nav>
+</header>
+
+<main>
+  <section id="inicio">
+    <h2>Bem-vindo!</h2>
+    <p>Este é o site da minha loja. Aqui você encontrará produtos incríveis. Navegue pelo menu para saber como comprar ou para conhecer nossos produtos.</p>
+  </section>
+
+  <section id="como-comprar" style="display:none;">
+    <h2>Como Comprar Nossos Produtos</h2>
+    <ol>
+      <li><strong>Escolha o produto:</strong> Navegue pela nossa loja e escolha o produto desejado.</li>
+      <li><strong>Adicione ao carrinho:</strong> Clique no botão "Adicionar ao Carrinho" na página do produto.</li>
+      <li><strong>Revise o carrinho:</strong> Confira os produtos adicionados clicando no menu "Carrinho".</li>
+      <li><strong>Finalize a compra:</strong> Clique em "Finalizar Compra" e siga as instruções.</li>
+    </ol>
+    <button onclick="mostrarSecao('loja')">Ir para a Loja</button>
+  </section>
+
+  <section id="loja" style="display:none;">
+    <h2>Loja - Produtos</h2>
+
+    <div class="produto" data-id="1" data-nome="Produto 1" data-preco="6.00">
+      <h3>Produto 1</h3>
+      <p>Descrição do Produto 1.</p>
+      <button class="btn-adicionar" onclick="adicionarAoCarrinho(1)">Adicionar ao Carrinho - R$ 6,00</button>
+      <button class="btn-comprar-agora" onclick="window.open('https://pay.kiwify.com.br/tnaCf78', '_blank')">Comprar Agora</button>
+    </div>
+
+    <div class="produto" data-id="2" data-nome="Produto 2" data-preco="6.00">
+      <h3>Produto 2</h3>
+      <p>Descrição do Produto 2.</p>
+      <button class="btn-adicionar" onclick="adicionarAoCarrinho(2)">Adicionar ao Carrinho - R$ 6,00</button>
+      <button class="btn-comprar-agora" onclick="window.open('https://pay.kiwify.com.br/tnaCf78', '_blank')">Comprar Agora</button>
+    </div>
+
+    <div class="produto" data-id="3" data-nome="Produto 3" data-preco="6.00">
+      <h3>Produto 3</h3>
+      <p>Descrição do Produto 3.</p>
+      <button class="btn-adicionar" onclick="adicionarAoCarrinho(3)">Adicionar ao Carrinho - R$ 6,00</button>
+      <button class="btn-comprar-agora" onclick="window.open('https://pay.kiwify.com.br/tnaCf78', '_blank')">Comprar Agora</button>
+    </div>
+  </section>
+
+  <section id="carrinho" style="display:none;">
+    <h2>Seu Carrinho</h2>
+    <ul id="lista-carrinho"></ul>
+    <p id="carrinho-total"></p>
+    <button id="btn-finalizar" onclick="finalizarCompra()">Finalizar Compra</button>
+    <button id="btn-voltar" onclick="mostrarSecao('loja')">Voltar à Loja</button>
+  </section>
+</main>
+
+<footer>
+  <p>© 2025 Minha Loja Online. Todos os direitos reservados.</p>
+</footer>
+
+<script>
+  const produtos = {
+    1: {nome: 'Produto 1', preco: 6.00},
+    2: {nome: 'Produto 2', preco: 6.00},
+    3: {nome: 'Produto 3', preco: 6.00},
+  };
+
+  let carrinho = [];
+
+  function mostrarSecao(secao) {
+    const secoes = ['inicio', 'como-comprar', 'loja', 'carrinho'];
+    secoes.forEach(id => {
+      document.getElementById(id).style.display = id === secao ? 'block' : 'none';
+    });
+    window.scrollTo(0,0);
+    atualizarContador();
+  }
+
+  function adicionarAoCarrinho(id) {
+    carrinho.push(id);
+    alert(produtos[id].nome + ' adicionado ao carrinho!');
+    atualizarContador();
+  }
+
+  function atualizarContador() {
+    document.getElementById('contador-carrinho').textContent = carrinho.length;
+  }
+
+  function mostrarCarrinho() {
+    const lista = document.getElementById('lista-carrinho');
+    lista.innerHTML = '';
+    if(carrinho.length === 0) {
+      lista.innerHTML = '<li>Seu carrinho está vazio.</li>';
+      document.getElementById('carrinho-total').textContent = '';
+      document.getElementById('btn-finalizar').style.display = 'none';
+      return;
+    }
+    const contagem = {};
+    carrinho.forEach(id => {
+      contagem[id] = (contagem[id] || 0) + 1;
+    });
+    let total = 0;
+    for(const id in contagem) {
+      const qtd = contagem[id];
+      const prod = produtos[id];
+      const subtotal = qtd * prod.preco;
+      total += subtotal;
+      const li = document.createElement('li');
+      li.textContent = `${prod.nome} - Qtd: ${qtd} - Subtotal: R$ ${subtotal.toFixed(2)}`;
+      lista.appendChild(li);
+    }
+    document.getElementById('carrinho-total').textContent = 'Total: R$ ' + total.toFixed(2);
+    document.getElementById('btn-finalizar').style.display = 'inline-block';
+  }
+
+  function finalizarCompra() {
+    if(carrinho.length === 0) {
+      alert('Seu carrinho está vazio.');
+      return;
+    }
+    alert('Obrigado pela compra! Você será redirecionado para finalizar o pagamento.');
+    window.open('https://pay.kiwify.com.br/tnaCf78', '_blank');
+  }
+
+  document.querySelectorAll('nav a').forEach(el => {
+    el.addEventListener('click', () => {
+      if(el.textContent.includes('Carrinho')) {
+        mostrarCarrinho();
+      }
+    });
+  });
+
+  mostrarSecao('inicio');
+</script>
+</body>
+</html>
